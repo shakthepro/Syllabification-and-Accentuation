@@ -64,10 +64,10 @@ def countVowels(word):
 		if letter in vowels:
 			vowel_count += 1
 	print("There will be " + str(vowel_count) + " vowels in " + "'" + word + "'!")
-	vowel_count = int(vowel_count) - 1
+	vowel_count = int(vowel_count)
 	print("There will be " + str(vowel_count) + " syllables in " + "'" + word + "'!")
 	line_count = int(vowel_count) - 1
-	print("There will be ", str(line_count) + " lines in " + "'" + word + "'!")
+	print("There will be " + str(line_count) + " lines in " + "'" + word + "'!")
 	return vowel_count
 
 def findConsonant(word):
