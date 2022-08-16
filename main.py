@@ -55,7 +55,21 @@ sub_btn.grid(row=2,column=1)
 root.mainloop()
 
 ##### calculate word #####
-# come back
+
+# calculate how many vowels are in the word and how many syllables will be in the word
+def countVowels(word):
+	print("counting Vowels...")
+	vowel_count = 0
+	for letter in word:
+		if letter in vowels:
+			vowel_count += 1
+	print("There will be " + str(vowel_count) + " vowels in " + "'" + word + "'!")
+	vowel_count = int(vowel_count) - 1
+	print("There will be " + str(vowel_count) + " syllables in " + "'" + word + "'!")
+	line_count = int(vowel_count) - 1
+	print("There will be ", str(line_count) + " lines in " + "'" + word + "'!")
+	return vowel_count
+
 def findConsonant(word):
 	print("locating Consonants...")
 	global new_word
@@ -77,6 +91,10 @@ def createSyllable(word):
 		if letter in consonants:
 			if word[word.index(letter) - 1] in vowels and word[word.index(letter) + 1] in vowels:
 				word = word[:word.index(letter)] + divider + word[word.index(letter):]
+			# if a vowel is surrounded by consonants, add a divider between the second consonants and vowel
+			elif word[word.index(letter) - 1] in consonants and word[word.index(letter) + 1] in consonants:
+				word = word[:word.index(letter)] + divider + word[word.index(letter):]
+			
 	print(word)
 	print("created Syllable!")
 
@@ -93,6 +111,8 @@ def doubleTripleConsonant(word):
 			print(word)
 
 
+
+countVowels(name)
 findConsonant(name)
 createSyllable(name)
 doubleTripleConsonant(name)
