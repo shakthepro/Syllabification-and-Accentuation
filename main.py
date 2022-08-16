@@ -1,20 +1,30 @@
-from unicodedata import name
-import letters
 import tkinter as tk
+import os
+os.system("color")
+
+#To make text bold and underlined, you can enclose the text in the escape sequence '\033[1;4m' and '\033[0m'.
+
+underline = "\x1B[4m"
+bold = "\x1B[1m"
+end = '\033[0m'
+boldANDunderline = bold + underline
+divider = "|"
 
 vowels = ["a", "e", "i", "o", "u"]
 consonants = ["b" , "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "y", "z"]
+dip = ["ai", "au", "ei", "eu", "oi", "ou", "ui", "uu", "ia", "ie", "io", "iu", "ua", "ue", "uo"]
+singleConsonants = ["ch", "ll", "rr"]
 
 root=tk.Tk()
 root.geometry("400x200")
 name_var=tk.StringVar()
-passw_var=tk.StringVar()
+
 
 def submit():
+	global name
 	name = name_var.get()
 	
-	print("Calculating " + name + "for you...")
-
+	print("Calculating " + "'" + name + "'" + " for you...")
 	name_var.set("")
 
 
@@ -43,4 +53,47 @@ sub_btn.grid(row=2,column=1)
 # performing an infinite loop
 # for the window to display
 root.mainloop()
+
+##### calculate word #####
+# come back
+def findConsonant(word):
+	print("locating Consonants...")
+	global new_word
+	new_word = []
+	for letter in word:
+		if letter in consonants:
+			letter = underline + letter + end
+			new_word.append(letter)
+			print("".join(new_word))
+		else:
+			new_word.append(letter)
+	print("located Consonants!")
+
+def createSyllable(word):
+	print("creating Syllable...")
+	for letter in word:
+		#check if a consonant is surrounded by vowels and add a divider between the first vowel and consonant
+		if letter in consonants:
+			if word[word.index(letter) - 1] in vowels and word[word.index(letter) + 1] in vowels:
+				word = word[:word.index(letter)] + divider + word[word.index(letter):]
+	print(word)
+	print("created Syllable!")
+
+def doubleTripleConsonant(word):
+	#if two consonats are follwing one another, add a divider between them unless they second letter starts with a l or r
+	for letter in word:
+		if letter in consonants:
+			if word[word.index(letter) + 1] in consonants and word.startsWith("l") or word.startsWith("r"):
+				break
+			else:
+				#add a divider between the consonants
+				word = word[:word.index(letter)] + divider + word[word.index(letter):]
+		else:
+			print(word)
+
+
+findConsonant(name)
+createSyllable(new_word)
+doubleTripleConsonant(name)
+
 
