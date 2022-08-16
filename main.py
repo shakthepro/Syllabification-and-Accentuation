@@ -64,13 +64,14 @@ def findConsonant(word):
 		if letter in consonants:
 			letter = underline + letter + end
 			new_word.append(letter)
-			print("".join(new_word))
 		else:
 			new_word.append(letter)
+	global name
+	name = print("".join(new_word))
 	print("located Consonants!")
 
 def createSyllable(word):
-	print("creating Syllable...")
+	print("creating Syllables...")
 	for letter in word:
 		#check if a consonant is surrounded by vowels and add a divider between the first vowel and consonant
 		if letter in consonants:
@@ -93,7 +94,7 @@ def doubleTripleConsonant(word):
 
 
 findConsonant(name)
-createSyllable(new_word)
+createSyllable(name)
 doubleTripleConsonant(name)
 
 
